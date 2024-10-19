@@ -1,0 +1,19 @@
+name: github actions
+on: push 
+jobs:
+ building:
+   run-on: ubuntu-latest
+   steps:
+   - name: code checkout
+     uses: action/checkout@v4
+
+   - name: maven test
+     run: mvn test
+   - name: checkstyle
+     run: mvn checkstyle:checkstyle
+
+     
+
+     
+     
+  
