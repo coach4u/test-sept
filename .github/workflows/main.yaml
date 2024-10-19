@@ -2,7 +2,7 @@ name: github actions
 on: push 
 jobs:
  building:
-   run-on: ubuntu-latest
+   runs-on: ubuntu-latest
    steps:
    - name: code checkout
      uses: action/checkout@v4
