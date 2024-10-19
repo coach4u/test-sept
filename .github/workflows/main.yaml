@@ -11,6 +11,12 @@ jobs:
      run: mvn test
    - name: checkstyle
      run: mvn checkstyle:checkstyle
+     
+   - name: Upload test results
+      uses: actions/upload-artifact@v3
+      with:
+        name: test-results
+        path: target/surefire-reports/  
 
      
 
