@@ -1,35 +1,32 @@
-name: github actions
+name: GitHub Actions
 on: push 
 jobs:
   building:
     runs-on: ubuntu-latest
     steps:
-    - name: Code checkout
-      uses: actions/checkout@v4
+      - name: Code Checkout
+        uses: actions/checkout@v4
 
-    - name: Setup Java 11
-      uses: actions/setup-java@v3
-      with:
-        distribution: 'temurin'
-        java-version: '11'
+      - name: Setup Java 11
+        uses: actions/setup-java@v3
+        with:
+          distribution: 'temurin'
+          java-version: '11'
 
-    - name: Build with Maven
-      run: mvn clean package -DskipTests
+      - name: Build with Maven
+        run: mvn clean package -DskipTests
 
-    - name: Run Maven tests
-      run: mvn test
+      - name: Run Tests with Maven
+        run: mvn test
 
-    - name: List target directory contents after test
-      run: ls -al target
+      - name: Upload Test Reports
+        uses: actions/upload-artifact@v3
+        with:
+          name: test-reports
+          path: target/surefire-reports/**
 
-    - name: Upload test report artifact
-      uses: actions/upload-artifact@v3
-      with:
-        name: test-results
-        path: target/surefire-reports
-
-    - name: Upload JAR artifact
-      uses: actions/upload-artifact@v3
-      with:
-        name: application-jar
-        path: target/*.jar
+      - name: Upload Artifact
+        uses: actions/upload-artifact@v3
+        with:
+          name: application-jar
+          path: target/*.jar
